@@ -1,0 +1,8 @@
+[
+    {"question": "Quais camadas OSI o Classic Load Balancer atua?", "answer": "TCP (camada 4) e HTTP e HTTPS (Camada 7)", "labels": ["ELB", "Classic Load Balance"]},
+    {"question": "O Health Check do Classic Load Balancer é baseado em quais protocolos/camadas?", "answer": "TCP e HTTP/HTTPS", "labels": ["ELB", "Classic Load Balance"]},
+    {"question": "Como o Classic Load Balancer é acessado por clientes?", "answer": "Através de um hostname fixo", "labels": ["ELB", "Classic Load Balance"]},
+    {"question": "O que é um ping port?", "answer": "É a porta configurada no health check de um ELB", "labels": ["ELB", "Classic Load Balance"]},
+    {"question": "O que é um ping path?", "answer": "É o endpoint configurado no health check de um ELB", "labels": ["ELB", "Classic Load Balance"]},
+    {"question": "Explique como um EC2 pode ser acessível somente por um ELB.", "answer": "Colocando no fluxo de entrada (inbound rules) um Security Group que aponte para um ELB", "labels": ["ELB"]}
+]

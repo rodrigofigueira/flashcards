@@ -4,5 +4,14 @@
     {"question": "Como o Classic Load Balancer é acessado por clientes?", "answer": "Através de um hostname fixo", "labels": ["ELB", "Classic Load Balance"]},
     {"question": "O que é um ping port?", "answer": "É a porta configurada no health check de um ELB", "labels": ["ELB", "Classic Load Balance"]},
     {"question": "O que é um ping path?", "answer": "É o endpoint configurado no health check de um ELB", "labels": ["ELB", "Classic Load Balance"]},
-    {"question": "Explique como um EC2 pode ser acessível somente por um ELB.", "answer": "Colocando no fluxo de entrada (inbound rules) um Security Group que aponte para um ELB", "labels": ["ELB"]}
+    {"question": "Explique como um EC2 pode ser acessível somente por um ELB.", "answer": "Colocando no fluxo de entrada (inbound rules) um Security Group que aponte para um ELB", "labels": ["ELB"]},
+    {"question": "Qual ELB suporta HTTP/2 e WebSocket?", "answer": "ALB", "labels": ["ELB"]},
+    {"question": "Explique o redicionamento de um ALB.", "answer": "Permite o redirecionamento para vários aplicativos HTTP", "labels": ["ELB", "ALB"]},
+    {"question": "O que é um target group?", "answer": "Um grupo de máquinas EC2s, ECS tasks, Lambda Functions e ips", "labels": ["ELB", "ALB"]},
+    {"question": "Qual ELB utilizar se é for necessário o redicionamento de para diversos app http em uma mesma máquina?", "answer": "Application Load Balancer", "labels": ["ELB"]},
+    {"question": "Qual ELB utilizar quando é necessário redirecionamento HTTPS para HTTP?", "answer": "Application Load Balancer", "labels": ["ELB"]},
+    {"question": "Explicar routing table do ALB.", "answer": "É o redirecionamento de um path/hostname/query string para um target group.", "labels": ["ELB", "ALB"]},
+    {"question": "Como é feito o heath check do ALB?", "answer": "A nível de target group", "labels": ["ELB", "ALB"]},
+    {"question": "É possível redirecionar o fluxo de um ALB para mais de um target group?", "answer": "Sim", "labels": ["ELB", "ALB"]},
+    {"question": "Um recurso de um target group pode ver o ip do cliente?", "answer": "Não diretamente mas o ip vai no header X-Forwarded-For e a porta em X-Forwarded-Port", "labels": ["ELB", "ALB"]}
 ]

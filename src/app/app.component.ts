@@ -20,14 +20,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.cardService.getCards().subscribe(
-      cards => this.cards = cards,
+      cards => {
+        this.cards = this.shuffleArray(cards),
+        this.selectedCard = this.cards[this.index];
+      },
       error => console.log(error)
     )
 
-    this.selectedCard = this.cards[this.index];
-
   }
-
 
   verResposta(){
     this.isQuestion = false;
@@ -43,5 +43,16 @@ export class AppComponent implements OnInit {
     this.index = 0;
     this.selectedCard = this.cards[this.index];
   }
+
+  shuffleArray(arr: Card[]): Card[] {
+
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+
+  }
+
 
 }

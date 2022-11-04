@@ -16,3 +16,4 @@ Projeto de flash cards para estudar conceitos da AWS e futuramente para uso de e
 - [ ] Definir flag rever no Card
 - [ ] Criar component para remover lógica do app.component
 - [ ] Implementar Testes Automatizados
+- [ ] Implementar chips para labels na apresentação do card, utilizar https://material.angular.io/components/chips/examples

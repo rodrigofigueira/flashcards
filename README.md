@@ -15,3 +15,4 @@ Projeto de flash cards para estudar conceitos da AWS e futuramente para uso de e
 - [ ] Definir datas nos Cards
 - [ ] Definir flag rever no Card
 - [ ] Criar component para remover lógica do app.component
+- [ ] Implementar Testes Automatizados

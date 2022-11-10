@@ -1,7 +1,41 @@
 <div style="display: flex;
 align-items: center;
 justify-content: center;
-padding: 5vh 0 5vh 0;">
+padding: 5vh 0 5vh 0;
+flex-direction: column;"
+*ngIf="this.cards?.length"
+>
+
+  <div style="display: flex; flex-direction: column;">
+    <mat-form-field class="example-chip-list" appearance="fill" style="width: 82vw;">
+      <mat-label>Selecione as labels</mat-label>
+      <mat-chip-list #chipList aria-label="labels selection">
+        <mat-chip
+          *ngFor="let label of labels"
+          (removed)="remove(label)">
+          {{label}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Clique aqui..."
+          #labelInput
+          [formControl]="labelCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let label of filteredLabel | async" [value]="label">
+          {{label}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-icon matSuffix style="cursor: pointer;">play_arrow</mat-icon>
+    </mat-form-field>
+  </div>
+
 
   <mat-card style="width: 80vw; height: 80vh;">
 
@@ -20,6 +54,7 @@ padding: 5vh 0 5vh 0;">
     <mat-card-actions>
 
       <ng-container *ngIf="selectedCard; else fim">
+        <button mat-raised-button color="warn" *ngIf="index > 0" (click)="voltarQuestao()">Voltar</button>
         <button mat-raised-button *ngIf="isQuestion" (click)="verResposta()">Ver Resposta</button>
         <button mat-raised-button color="primary" *ngIf="!isQuestion" (click)="proximaQuestao()">Próxima Questão</button>
       </ng-container>

@@ -8,7 +8,7 @@ import { Card } from '../model/card.model';
 })
 export class CardService {
 
-  urlGet: string = '/assets/db.json';
+  urlGet: string = 'assets/db.json';
 
   constructor(private httpClient: HttpClient) { }
 

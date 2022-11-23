@@ -21,32 +21,26 @@ export class AppComponent implements OnInit {
   isQuestion: boolean = true;
   selectedCard?: Card;
   cards: Card[] = [];
+  allCards: Card[] = [];
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   labelCtrl = new FormControl('');
-  filteredLabel: Observable<string[]>;
+  filteredLabel?: Observable<string[]>;
   labels: string[] = [];
   allLabels: string[] = [];
 
   @ViewChild('labelInput') labelInput?: ElementRef<HTMLInputElement>;
 
 
-  constructor(private cardService: CardService){
-    this.filteredLabel = this.labelCtrl.valueChanges.pipe(
-      startWith(null),
-      map((label: string | null) => (label ? this._filter(label) : this.allLabels.slice())),
-    );
-  }
+  constructor(private cardService: CardService){}
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our label
     if (value) {
       this.labels.push(value);
     }
 
-    // Clear the input value
     event.chipInput!.clear();
 
     this.labelCtrl.setValue(null);
@@ -72,19 +66,18 @@ export class AppComponent implements OnInit {
     return this.allLabels.filter(label => label.toLowerCase().includes(filterValue));
   }
 
-  //para filtrar por labels
-  //arr.filter(x => x.labels.includes('ALB') || x.labels.includes('Classic Load Balance'))
-
-  //para filtrar os labels
-  //Array.from(new Set(arr.map(x => x.labels).flat(1)))
-
   ngOnInit(): void {
 
     this.cardService.getCards().subscribe(
       cards => {
-        this.cards = this.shuffleArray(cards),
-        this.selectedCard = this.cards[this.index];
-        this.allLabels = (Array.from(new Set(this.cards.map(x => x.labels).flat(1))) as string[]);
+        this.allCards = cards;
+        this.allLabels = (Array.from(new Set(this.allCards.map(x => x.labels).flat(1))) as string[]);
+
+        this.filteredLabel = this.labelCtrl.valueChanges.pipe(
+          startWith(null),
+          map((label: string | null) => (label ? this._filter(label) : this.allLabels.slice())),
+        );
+
       },
       error => console.log(error)
     )
@@ -120,6 +113,22 @@ export class AppComponent implements OnInit {
     }
     return arr;
 
+  }
+
+  filtrarPorLabels(){
+
+    let arr = this.allCards.filter(card => {
+      return card.labels?.some(e => { return this.labels.some(f => { return f == e}) });
+    });
+
+    this.cards = this.shuffleArray(arr);
+    this.selectedCard = this.cards[this.index];
+
+  }
+
+  filtrarCardsPorLabelsSelecionados(){
+    this.cards = this.shuffleArray(this.allCards);
+    this.selectedCard = this.cards[this.index];
   }
 
 

@@ -3,7 +3,6 @@ align-items: center;
 justify-content: center;
 padding: 5vh 0 5vh 0;
 flex-direction: column;"
-*ngIf="this.cards?.length"
 >
 
   <div style="display: flex; flex-direction: column;">
@@ -32,12 +31,12 @@ flex-direction: column;"
           {{label}}
         </mat-option>
       </mat-autocomplete>
-      <mat-icon matSuffix style="cursor: pointer;">play_arrow</mat-icon>
+      <mat-icon matSuffix style="cursor: pointer;" (click)="filtrarPorLabels()">play_arrow</mat-icon>
     </mat-form-field>
   </div>
 
 
-  <mat-card style="width: 80vw; height: 80vh;">
+  <mat-card style="width: 80vw; height: 80vh;" *ngIf="this.cards?.length">
 
     <mat-card-title *ngIf="isQuestion">Questão {{index + 1}}</mat-card-title>
     <mat-card-title *ngIf="!isQuestion">Resposta {{index + 1}}</mat-card-title>
